@@ -1,0 +1,27 @@
+<header>
+    <div class="jumbotron jumbotron-image color-grey-light"
+    style="background-image: url('https://mdbootstrap.com/img/Photos/Others/clothes(3)-crop.jpg'); height: 400px;">
+    <div class="mask rgba-black-strong flex-center align-items-center h-100">
+      <div class="container text-center white-text py-5">
+        <h1 class="mb-3">Apsara Kitchen Gallery and Gift House</h1>
+      </div>
+    </div>
+    </div>
+  </header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 search">
+            <app-search (products)="setProducts($event)"></app-search>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <app-category (filters)="filterProducts($event)"></app-category>
+        </div>
+        <div class="col-md-9">
+            <div *ngFor="let product of products">
+                <app-product [product]="product"></app-product>
+            </div>
+        </div>
+    </div>
+</div>

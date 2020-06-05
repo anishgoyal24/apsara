@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
+        <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>
+    </div>
+</div>
