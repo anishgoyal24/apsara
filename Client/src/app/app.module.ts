@@ -17,6 +17,11 @@ import { ProductComponent } from './home/product/product.component';
 import { SearchComponent } from './home/search/search.component';
 import { LoginComponent } from './admin/login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import { NavbarComponent } from './admin/navbar/navbar.component';
+import { OverviewComponent } from './admin/overview/overview.component';
+import { ProductsComponent } from './admin/products/products.component';
+import { AddProductComponent } from './admin/products/add-product/add-product.component';
+import { ManageProductsComponent } from './admin/products/manage-products/manage-products.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { AdminComponent } from './admin/admin.component';
     ProductComponent,
     SearchComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    NavbarComponent,
+    OverviewComponent,
+    ProductsComponent,
+    AddProductComponent,
+    ManageProductsComponent
   ],
   imports: [
     BrowserModule,

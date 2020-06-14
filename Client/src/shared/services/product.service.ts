@@ -35,4 +35,30 @@ export class ProductService {
       params: {query}
     }).toPromise();
   }
+
+
+  /**
+   * Upload product photo
+   * @param image Image of the product
+   * @param filename filename of the product
+   */
+  uploadPhoto(image, filename){
+    var formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(environment.UPLOAD_URL + '?filename=' + filename, formData).toPromise();
+  }
+
+
+  /**
+   * Create a new product
+   * @param productData Product Details
+   */
+  createProduct(productData: any){
+    return this.http.post(environment.PRODUCT_URL + '/add', {productData}).toPromise();
+  }
+
+
+  deleteProduct(productId: any){
+    return this.http.post(environment.PRODUCT_URL + '/remove', {productId}).toPromise();
+  }
 }

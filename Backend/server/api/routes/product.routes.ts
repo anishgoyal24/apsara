@@ -23,4 +23,7 @@ router.post('/by-category', productController.getByCategories);
 // Get featured products
 router.get('/featured', productController.getFeatured);
 
+// Search products
+router.get('/search', productController.search);
+
 export { router as ProductRoutes };

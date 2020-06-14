@@ -133,16 +133,27 @@ export class ProductsController{
     }
 
 
+    // Function to search products
     async search(req: Request, res: Response, next: NextFunction){
         try {
             
             const { query } = req.query;
 
+            // Search Products
             const products: any = await Product.find({
-                name: { "$regex": query, "$options": "i" }
-            })
+                $or: [
+                    { name: { "$regex": query, "$options": "i" } }
+                ]
+            });
+
+            // Send status 200 response
+            return res.status(200).json({
+                message: "Successfully Searched Products",
+                products: products
+            });
         } catch (error) {
-            
+            // Send Error Response
+            return sendErr(res, new Error(error), "Internal Server Error", 500);
         }
     }
 

@@ -1,0 +1,74 @@
+<div class="card-media">
+    <!-- <img src="../../../../assets/images/new_product.svg"> -->
+    <div class="container">
+        <h1><b>New Products</b></h1>
+
+        <div class="form-group">
+            <label for="fullName">Product Name</label>
+            <input type="text" [(ngModel)]="productDetails.name" class="form-control" id="fullProduct" placeholder="Product Name" name="fullProduct">
+        </div>
+        <div class="form-group">
+            <label for="fullName">Description</label>
+            <textarea type="textbox" [(ngModel)]="productDetails.description" class="form-control" id="quantity" placeholder="Item Description" name="quantity"></textarea>
+        </div>
+
+        <div class="form-group">
+            <div class="dropdown">
+              <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Party Type
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="this.type = 'Wholesale'; this.productDetails.type = 'Wholesale'">Wholesale</a>
+                <a class="dropdown-item" (click)="this.type = 'Retail'; this.productDetails.type = 'Retail'">Retail</a>
+              </div>
+            </div>
+            <p *ngIf="this.type" style="margin-top: 2%;">Selected Type: <strong>{{this.type}}</strong></p>
+          </div>
+
+        <div class="form-group" *ngIf="productDetails.type=='Wholesale'">
+            <label for="fullName">Product URL</label>
+            <input type="text" [(ngModel)]="productDetails.url" class="form-control" id="url" placeholder="Product URL" name="url">
+        </div>
+
+        <div class="form-group">
+            <div *ngFor="let category of categories" style="display: inline; margin-right: 10px;">
+                <mat-checkbox [id]="category._id" [name]="category.name" [value]="category.name" (change)="toggleCategory($event)">{{ category.name }}</mat-checkbox>
+            </div>
+        </div>
+
+        <!-- <div class="form-group">
+            <div class="dropdown">
+              <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Category
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div *ngFor="let category of this.categories">
+                    <a class="dropdown-item" (click)="setCategory(category)">{{category?.category}}</a>
+                </div>
+              </div>
+            </div>
+            <p *ngIf="this.category" style="margin-top: 2%;">Selected Category: <strong>{{this.category}}</strong></p>
+          </div> -->
+
+
+          <!-- TODO categories -->
+
+          <div class="form-group" *ngIf="productDetails.name.length>0">
+            <label for="fullName">Select Product Image</label>
+            <button type="button" class="btn btn-link">
+                <input #fileInput type="file" class="btn btn-warning btn-md file-input" (input)="onAttach($event)" placeholder="File" accept="image/*" />
+            </button>
+        </div>
+
+        <div class="form-group">
+            <mat-checkbox id="featured" name="featured" value="Featured" (change)="toggleFeatured($event)">{{ "Featured" }}</mat-checkbox>
+        </div>
+
+        <div class="form-group">
+            <button class="btn form-control btn-md btn-primary" (click)="onCreateProduct(this.productDetails)">Create Product</button>
+        </div>
+    </div>
+
+</div>

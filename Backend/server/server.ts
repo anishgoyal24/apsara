@@ -11,22 +11,11 @@ const multer = require('multer');
 // Initiliazing Database Connection
 require('./db');
 
-// Multer
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, __dirname + '/uploads/images')
-      },
-      filename: function (req, file, cb) {
-        cb(null, req.query['filename'])
-      }
-})
-
-var upload = multer({
-    storage: storage,
-})
-
 // Defining new Express application
 const app = express();
+
+// cors middleware for orign and Headers
+app.use(cors());
 
 // Load configuration based on the environment states
 if (process.env.NODE_ENV !== 'production') {
@@ -35,9 +24,6 @@ if (process.env.NODE_ENV !== 'production') {
 else {
     productionConfig();
 }
-
-// cors middleware for orign and Headers
-app.use(cors());
 
 // Use Morgan middleware for logging every request status on console
 app.use(morgan('dev'));
@@ -57,6 +43,20 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Handle POST requests that come in formatted as JSON
 app.use(express.json());
+
+// Multer
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, __dirname + '/uploads/images')
+      },
+      filename: function (req, file, cb) {
+        cb(null, req.query['filename'] + '.jpg')
+      }
+})
+
+var upload = multer({
+    storage: storage,
+})
 
 // Handling GZIPPED ROUTES
 const encodeResToGzip = (contentType: any) => {
@@ -89,7 +89,9 @@ app.use('/api/category', CategoryRoutes);
 app.use('/api/user', UserRoutes)
 
 // Upload
-app.post('/api/upload', upload.single('image'));
+app.post('/api/upload', upload.single('image'), (req: any, res)=>{
+    console.log(req.files);
+});
 
 // TODO Add routes api
 

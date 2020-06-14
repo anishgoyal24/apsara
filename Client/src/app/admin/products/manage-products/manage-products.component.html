@@ -1,0 +1,14 @@
+<div class="card-media">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 search">
+                <app-search (products)="setProducts($event)"></app-search>
+            </div>
+        </div>
+        <div class="row" *ngFor="let product of products">
+            <div class="col-md-12">
+                <app-product [product]="product" [edit]="true" (delete)="deleteFromList($event)"></app-product>
+            </div>
+        </div>
+    </div>
+</div>

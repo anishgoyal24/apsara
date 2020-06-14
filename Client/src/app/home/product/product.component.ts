@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { ProductService } from 'src/shared/services/product.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -7,11 +9,29 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private productService: ProductService
+  ) { }
 
   @Input('product') product: any;
 
+  @Input('edit') editable: boolean = false;
+
+  @Output('delete') deleteEmitter = new EventEmitter();
+
   ngOnInit(): void {
-    console.log(this.product);
+  }
+
+  delete(productId){
+    new Promise((resolve, reject)=>{
+      this.productService.deleteProduct(productId).then((res)=>{
+        console.log(res);
+        this.deleteEmitter.emit(productId);
+        resolve();
+      }).catch((err)=>{
+        console.log(err);
+        reject();
+      })
+    })
   }
 }

@@ -20,7 +20,10 @@ export class SearchComponent implements OnInit {
   }
 
   search(){
-    if (this.query=='')return;
+    if (this.query==''){
+      this.products.emit([]);
+      return;
+    }
     new Promise((resolve, reject)=>{
       this.productService.search(this.query).then((res)=>{
         this.products.emit(res['products']);
