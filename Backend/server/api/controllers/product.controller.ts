@@ -1,6 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import { sendErr } from "../../utils/sendError";
 import { Product, Category } from '../models';
+const fs = require('fs'); 
 
 export class ProductsController{
 
@@ -37,6 +38,10 @@ export class ProductsController{
             const product: any = await Product.findOneAndDelete({
                 _id: productId
             });
+
+
+            // Delete image
+            fs.unlinkSync('Backend/server/uploads/images' + product.name + '.jpg')
 
             // Send status 200 response
             return res.status(200).json({
@@ -98,7 +103,7 @@ export class ProductsController{
             // Retrieve products with specified categories
             const products: any = await Product.find({
                 category: { $in: categories } 
-            });
+            }).populate('category', 'name').lean();
 
             // Send status 200 response
             return res.status(200).json({
@@ -119,7 +124,7 @@ export class ProductsController{
             // Retrieve products with specified categories
             const products: any = await Product.find({
                 featured: true
-            });
+            }).populate('category', 'name').lean();
 
             // Send status 200 response
             return res.status(200).json({
@@ -151,6 +156,38 @@ export class ProductsController{
                 message: "Successfully Searched Products",
                 products: products
             });
+        } catch (error) {
+            // Send Error Response
+            return sendErr(res, new Error(error), "Internal Server Error", 500);
+        }
+    }
+
+
+    async edit(req: Request, res: Response, next: NextFunction){
+        try {
+            
+            const { productData } = req.body;
+
+            const productName: any = await Product.findById(productData._id).select('name');
+
+            // Search product amd update
+            const product: any = await Product.findByIdAndUpdate(productData._id, {
+                $set: productData
+            }, {
+                new: true
+            });
+
+            // Rename image
+            fs.rename('Backend/server/uploads/images' + productName.name + '.jpg', 'Backend/server/uploads/images' + product.name + '.jpg', () => { 
+                console.log("\nFile Renamed!\n"); 
+            });
+
+            // Send status 200 response
+            return res.status(200).json({
+                message: "Successfully Updated Product",
+                product: product
+            });
+
         } catch (error) {
             // Send Error Response
             return sendErr(res, new Error(error), "Internal Server Error", 500);

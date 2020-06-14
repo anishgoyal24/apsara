@@ -17,4 +17,12 @@ export class CategoryService {
   getCategories(){
     return this.http.get(environment.CATEGORY_URL + '/').toPromise();
   }
+
+  /**
+   * Add a new category
+   * @param categoryName 
+   */
+  addCategory(categoryName){
+    return this.http.post(environment.CATEGORY_URL + '/add', {categoryName}).toPromise();
+  }
 }

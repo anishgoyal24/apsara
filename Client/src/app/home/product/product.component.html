@@ -5,5 +5,6 @@
         <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
         <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>
         <button class="btn btn-danger" *ngIf="editable==true" (click)="delete(product._id)">Delete</button>
+        <button class="btn btn-secondary" *ngIf="editable==true" (click)="openEditDialog()">Edit</button>
     </div>
 </div>

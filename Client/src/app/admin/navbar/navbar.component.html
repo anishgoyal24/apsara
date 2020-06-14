@@ -20,10 +20,16 @@
             </i><b>Manage Products</b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/admin', 'categories', 'home']" routerLinkActive="router-link-active" >
+        <a class="nav-link" [routerLink]="['/admin', 'categories', 'add']" routerLinkActive="router-link-active" >
           <i class="material-icons">
             category
-            </i><b>Product Categories</b></a>
+            </i><b>Add Product Category</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin', 'categories', 'remove']" routerLinkActive="router-link-active" >
+          <i class="material-icons">
+            category
+            </i><b>Remove Product Category</b></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/admin', 'change-password']" routerLinkActive="router-link-active" >

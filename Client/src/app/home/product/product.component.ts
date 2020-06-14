@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { ProductService } from 'src/shared/services/product.service';
 import { EventEmitter } from '@angular/core';
+import {MatDialogModule, MatDialog} from '@angular/material/dialog';
+import { EditDialogComponent } from '../../admin/products/manage-products/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-product',
@@ -10,7 +12,8 @@ import { EventEmitter } from '@angular/core';
 export class ProductComponent implements OnInit {
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private dialog: MatDialog
   ) { }
 
   @Input('product') product: any;
@@ -33,5 +36,11 @@ export class ProductComponent implements OnInit {
         reject();
       })
     })
+  }
+
+  openEditDialog(){
+    let dialogRef = this.dialog.open(EditDialogComponent, {
+      data: this.product
+    });
   }
 }

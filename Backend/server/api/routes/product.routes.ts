@@ -26,4 +26,7 @@ router.get('/featured', productController.getFeatured);
 // Search products
 router.get('/search', productController.search);
 
+// Edit Product
+router.post('/edit', productController.edit);
+
 export { router as ProductRoutes };

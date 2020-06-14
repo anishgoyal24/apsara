@@ -9,7 +9,7 @@ import { ProductService } from 'src/shared/services/product.service';
 export class ManageProductsComponent implements OnInit {
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
   ) { }
 
   products = []
@@ -26,6 +26,7 @@ export class ManageProductsComponent implements OnInit {
     for (var i = 0; i < this.products.length; i++){
       if (this.products[i]._id == productId){
         index = i;
+        break;
       }
     }
     if (index > -1){

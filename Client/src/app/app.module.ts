@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
  */
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,9 @@ import { OverviewComponent } from './admin/overview/overview.component';
 import { ProductsComponent } from './admin/products/products.component';
 import { AddProductComponent } from './admin/products/add-product/add-product.component';
 import { ManageProductsComponent } from './admin/products/manage-products/manage-products.component';
+import { EditDialogComponent } from './admin/products/manage-products/edit-dialog/edit-dialog.component';
+import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
+import { CategoriesComponent } from './admin/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { ManageProductsComponent } from './admin/products/manage-products/manage
     OverviewComponent,
     ProductsComponent,
     AddProductComponent,
-    ManageProductsComponent
+    ManageProductsComponent,
+    EditDialogComponent,
+    AddCategoryComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +51,15 @@ import { ManageProductsComponent } from './admin/products/manage-products/manage
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EditDialogComponent
+  ]
 })
 export class AppModule { }

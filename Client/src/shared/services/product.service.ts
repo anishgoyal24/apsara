@@ -58,7 +58,20 @@ export class ProductService {
   }
 
 
+  /**
+   * Delete Product
+   * @param productId ProductId 
+   */
   deleteProduct(productId: any){
     return this.http.post(environment.PRODUCT_URL + '/remove', {productId}).toPromise();
+  }
+
+
+  /**
+   * Edit Product
+   * @param productData 
+   */
+  editProduct(productData: any){
+    return this.http.post(environment.PRODUCT_URL + '/edit', {productData}).toPromise();
   }
 }

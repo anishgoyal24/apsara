@@ -1,0 +1,16 @@
+<div class="card-media">
+    <div class="container">
+        <h1><b>Add Category</b></h1>
+
+        <div class="form-group">
+            <label for="name">Category Name</label>
+            <input type="text" [(ngModel)]="categoryName" class="form-control" id="name" placeholder="Category Name" name="name">
+        </div>
+
+        <div class="form-group">
+            <button class="btn form-control btn-md btn-primary" (click)="onCreateCategory(this.categoryName)">Create Category</button>
+        </div>
+
+
+    </div>
+</div>

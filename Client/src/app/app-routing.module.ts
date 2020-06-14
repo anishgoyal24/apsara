@@ -15,6 +15,10 @@ import { ManageProductsComponent } from './admin/products/manage-products/manage
 import { AuthGuard } from 'src/shared/gaurds/auth.guard';
 import { NavigationGuard } from 'src/shared/gaurds/navigation.guard';
 
+// ------CATEGORIES--------//
+import { CategoriesComponent } from './admin/categories/categories.component';
+import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,6 +30,11 @@ const routes: Routes = [
     { path: 'product', component: ProductsComponent, children: [
       { path: 'add', component: AddProductComponent },
       { path: 'manage', component: ManageProductsComponent }
+    ] },
+
+    // Categories
+    { path: 'categories', component: CategoriesComponent, children: [
+      { path: 'add', component: AddCategoryComponent }
     ] }
 
 
