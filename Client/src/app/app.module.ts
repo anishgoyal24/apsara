@@ -7,7 +7,9 @@ import { FormsModule } from '@angular/forms';
  */
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +28,8 @@ import { ManageProductsComponent } from './admin/products/manage-products/manage
 import { EditDialogComponent } from './admin/products/manage-products/edit-dialog/edit-dialog.component';
 import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
 import { CategoriesComponent } from './admin/categories/categories.component';
+import { RemoveCategoryComponent } from './admin/categories/remove-category/remove-category.component';
+import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import { CategoriesComponent } from './admin/categories/categories.component';
     ManageProductsComponent,
     EditDialogComponent,
     AddCategoryComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    RemoveCategoryComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +58,14 @@ import { CategoriesComponent } from './admin/categories/categories.component';
     BrowserAnimationsModule,
     FormsModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    SnotifyModule,
+    NgbModule
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

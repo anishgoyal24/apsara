@@ -32,7 +32,7 @@ export class UserController{
                 });
             }
         } catch (error) {
-            sendErr(res, new Error(error), 'Internal Server Error!', 500);
+            return sendErr(res, new Error(error), 'Internal Server Error!', 500);
         }
     }
 
@@ -57,6 +57,44 @@ export class UserController{
             }
         } catch (error) {
             return 500;
+        }
+    }
+
+
+    // Function to change password
+    async changePassword(req: Request, res: Response, next: NextFunction){
+        try {
+            
+            // Get user data from req
+            const { userData } = req.body;
+
+            // Find user in db
+            const user: any = await User.find({
+                $and: [
+                    { username: userData.username },
+                    { password: userData.oldPassword }
+                ]
+            });
+
+            // If User found
+            if (user){
+                await User.findByIdAndUpdate(user._id, {
+                    $set: { password: userData.newPassword }
+                }, {
+                    new: true
+                });
+
+                return res.status(200).json({
+                    message: "Successfully Changed Password!"
+                });
+            }
+
+            // If user not found
+            else throw(new Error('No Such User'));
+
+        } catch (error) {
+            // Error response
+            return sendErr(res, new Error(error), 'Internal Server Error!', 500);
         }
     }
 

@@ -3,6 +3,7 @@ import { ProductService } from 'src/shared/services/product.service';
 import { EventEmitter } from '@angular/core';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import { EditDialogComponent } from '../../admin/products/manage-products/edit-dialog/edit-dialog.component';
+import { UtilityService } from 'src/shared/services/utility.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utilityService: UtilityService
   ) { }
 
   @Input('product') product: any;
@@ -26,16 +28,15 @@ export class ProductComponent implements OnInit {
   }
 
   delete(productId){
-    new Promise((resolve, reject)=>{
+    this.utilityService.asyncNotification('Deleting product please wait', new Promise((resolve, reject)=>{
       this.productService.deleteProduct(productId).then((res)=>{
-        console.log(res);
         this.deleteEmitter.emit(productId);
-        resolve();
+        resolve(this.utilityService.resolveAsyncPromise('Successfully Deleted Product!'));
       }).catch((err)=>{
         console.log(err);
-        reject();
+        reject(this.utilityService.rejectAsyncPromise('There was some error in deleting the product. Please try again later!'));
       })
-    })
+    }))
   }
 
   openEditDialog(){

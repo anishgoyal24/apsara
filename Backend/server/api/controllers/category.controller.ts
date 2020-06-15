@@ -41,9 +41,9 @@ export class CategoryController{
 
             // Delete category from all products
             const products: any = await Product.updateMany({
-                "category._id": categoryId
+                "category": categoryId
             }, {
-                $pull: { category: { _id: categoryId } }
+                $pull: { category: categoryId }
             });
 
             // Send status 200 response

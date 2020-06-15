@@ -25,4 +25,12 @@ export class CategoryService {
   addCategory(categoryName){
     return this.http.post(environment.CATEGORY_URL + '/add', {categoryName}).toPromise();
   }
+
+  /**
+   * Remove a category
+   * @param categoryId CategoryId of the category to be removed
+   */
+  removeCategory(categoryId: any){
+    return this.http.post(environment.CATEGORY_URL + '/remove', {categoryId}).toPromise();
+  }
 }

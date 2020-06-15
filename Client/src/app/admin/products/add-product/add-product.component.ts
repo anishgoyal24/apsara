@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/shared/services/product.service';
 import { CategoryService } from 'src/shared/services/category.service';
+import { UtilityService } from 'src/shared/services/utility.service';
 
 @Component({
   selector: 'app-add-product',
@@ -11,7 +12,8 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private utilityService: UtilityService
   ) { }
 
   productDetails ={
@@ -45,29 +47,26 @@ export class AddProductComponent implements OnInit {
   onAttach($event){
     var image = $event.target.files[0];
     var filename = this.productDetails.name.toLowerCase();
-    new Promise((resolve, reject)=>{
+    this.utilityService.asyncNotification('Uploading image...', new Promise((resolve, reject)=>{
       this.productService.uploadPhoto(image, filename).then((res)=>{
         this.imageUploaded = true;
-        console.log(this.imageUploaded);
-        resolve();
+        resolve(this.utilityService.resolveAsyncPromise('Image Successfully Uploaded!'));
       }).catch((err)=>{
         console.log(err);
-        reject();
+        reject(this.utilityService.rejectAsyncPromise('There was some error in uploading the image. Please try again later!'));
       })
-    })
+    }))
   }
 
   onCreateProduct(productDetails){
-    console.log(productDetails);
-    new Promise((resolve, reject)=>{
+    this.utilityService.asyncNotification("Creating product please wait...", new Promise((resolve, reject)=>{
       this.productService.createProduct(productDetails).then((res)=>{
-        console.log(res);
-        resolve();
+        resolve(this.utilityService.resolveAsyncPromise('Successfully Created Product!'));
       }).catch((err)=>{
         console.log(err);
-        reject();
+        reject(this.utilityService.rejectAsyncPromise('There was some error in creating the product. Please try again later!'));
       })
-    })
+    }))
   }
 
 

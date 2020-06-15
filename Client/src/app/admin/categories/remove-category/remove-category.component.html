@@ -1,0 +1,17 @@
+<div class="card-media">
+    <div class="container">
+        <h1><b>Remove Categories</b></h1>
+
+        <div class="card-body">
+            <div *ngFor="let category of categories" class="row">
+                <div class="col-md-8">
+                    <p>{{ category.name }}</p>
+                </div>
+
+                <div class="col-md-4">
+                    <button class="btn btn-danger" (click)="delete(category._id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

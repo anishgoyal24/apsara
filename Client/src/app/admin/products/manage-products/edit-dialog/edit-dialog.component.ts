@@ -15,7 +15,7 @@ export class EditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditDialogComponent>,
     private categoryService: CategoryService,
-    private productService: ProductService
+    private productService: ProductService,
   ) { }
 
   clonedData: any;

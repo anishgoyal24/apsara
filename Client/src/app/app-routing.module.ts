@@ -18,6 +18,8 @@ import { NavigationGuard } from 'src/shared/gaurds/navigation.guard';
 // ------CATEGORIES--------//
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
+import { RemoveCategoryComponent } from './admin/categories/remove-category/remove-category.component';
+import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -34,8 +36,11 @@ const routes: Routes = [
 
     // Categories
     { path: 'categories', component: CategoriesComponent, children: [
-      { path: 'add', component: AddCategoryComponent }
-    ] }
+      { path: 'add', component: AddCategoryComponent },
+      { path: 'remove', component: RemoveCategoryComponent }
+    ] },
+
+    { path: 'change-password', component: ChangePasswordComponent }
 
 
   ] },
