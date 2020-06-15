@@ -2,6 +2,7 @@ import { Response, Request, NextFunction } from "express";
 import { sendErr } from "../../utils/sendError";
 import { Product, Category } from '../models';
 const fs = require('fs'); 
+import path from 'path';
 
 export class ProductsController{
 
@@ -41,7 +42,7 @@ export class ProductsController{
 
 
             // Delete image
-            fs.unlinkSync('Backend/server/uploads/images' + product.name + '.jpg')
+            fs.unlinkSync(path.join(__dirname, '../../uploads/images' + product.name + '.jpg'))
 
             // Send status 200 response
             return res.status(200).json({
@@ -178,7 +179,8 @@ export class ProductsController{
             });
 
             // Rename image
-            fs.rename('Backend/server/uploads/images' + productName.name + '.jpg', 'Backend/server/uploads/images' + product.name + '.jpg', () => { 
+            fs.rename(path.join(__dirname, '../../uploads/images' + product.name + '.jpg'), 
+            path.join(__dirname, '../../uploads/images' + product.name + '.jpg'), () => { 
                 console.log("\nFile Renamed!\n"); 
             });
 

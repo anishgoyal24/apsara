@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { cloneDeep } from "lodash";
 import { CategoryService } from 'src/shared/services/category.service';
 import { ProductService } from 'src/shared/services/product.service';
+import { UtilityService } from 'src/shared/services/utility.service';
+import { resolve } from 'dns';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -16,6 +18,7 @@ export class EditDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditDialogComponent>,
     private categoryService: CategoryService,
     private productService: ProductService,
+    private utilityService: UtilityService
   ) { }
 
   clonedData: any;
@@ -66,12 +69,16 @@ export class EditDialogComponent implements OnInit {
     
 
     if (this.imageChanged){
-      Promise.all([p1, p2]).then(()=>{
-        console.log('Product Updated')
-        this.dialogRef.close();
-      }).catch((err)=>{
-        console.log(err);
-      });
+
+      this.utilityService.asyncNotification('Please wait...',
+         Promise.all([p1, p2])
+        .then(() => {
+          console.log('Product Updated')
+          this.dialogRef.close();
+        }).catch((err) => {
+          console.log(err);
+        }))
+
     }
 
     else{
