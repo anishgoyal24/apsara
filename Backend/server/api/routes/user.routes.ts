@@ -9,6 +9,6 @@ const router = express.Router();
 router.post('/authenticate', userController.authenticate);
 
 // Change Password
-router.post('change-password', userController.changePassword);
+router.post('/change-password', userController.changePassword);
 
 export { router as UserRoutes };

@@ -77,8 +77,8 @@ export class UserController{
             });
 
             // If User found
-            if (user){
-                await User.findByIdAndUpdate(user._id, {
+            if (user.length>0){
+                const userUpdate: any = await User.findByIdAndUpdate(user._id, {
                     $set: { password: userData.newPassword }
                 }, {
                     new: true
