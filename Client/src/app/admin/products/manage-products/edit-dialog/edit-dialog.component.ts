@@ -4,7 +4,6 @@ import { cloneDeep } from "lodash";
 import { CategoryService } from 'src/shared/services/category.service';
 import { ProductService } from 'src/shared/services/product.service';
 import { UtilityService } from 'src/shared/services/utility.service';
-import { resolve } from 'dns';
 
 @Component({
   selector: 'app-edit-dialog',
