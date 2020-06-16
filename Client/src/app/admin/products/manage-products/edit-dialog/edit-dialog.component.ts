@@ -4,7 +4,6 @@ import { cloneDeep } from "lodash";
 import { CategoryService } from 'src/shared/services/category.service';
 import { ProductService } from 'src/shared/services/product.service';
 import { UtilityService } from 'src/shared/services/utility.service';
-import { resolve } from 'dns';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -58,36 +57,48 @@ export class EditDialogComponent implements OnInit {
 
   onEditProduct(data: any){
 
-    var p1 = new Promise(()=>{
-      this.productService.editProduct(data);
+    var p1 = new Promise((resolve)=>{
+      this.productService.editProduct(data)
+      .then(()=> resolve())
     });
 
-    var p2 = new Promise(()=>{
+    var p2 = new Promise((resolve)=>{
       var filename = this.data.name.toLowerCase();
-      this.productService.uploadPhoto(this.image, filename);
+      this.productService.uploadPhoto(this.image, filename)
+      .then(()=> resolve())
     })
     
 
-    if (this.imageChanged){
+    if (this.imageChanged) {
 
       this.utilityService.asyncNotification('Please wait...',
-         Promise.all([p1, p2])
-        .then(() => {
-          console.log('Product Updated')
-          this.dialogRef.close();
-        }).catch((err) => {
-          console.log(err);
-        }))
+        new Promise((resolve, reject) => {
+          Promise.all([p1, p2])
+            .then(() => {
+              console.log('Product Updated')
+              resolve(this.utilityService.resolveAsyncPromise('Product Updated!'))
+              this.dialogRef.close();
+            }).catch((err) => {
+              reject(this.utilityService.rejectAsyncPromise('Unable to update the product!'))
+              console.log(err);
+            })
+        })
+      )
 
     }
 
-    else{
-      Promise.all([p1]).then(()=>{
-        console.log('Product Updated')
-        this.dialogRef.close();
-      }).catch((err)=>{
-        console.log(err);
-      })
+    else {
+      this.utilityService.asyncNotification('Please wait...',
+        new Promise((resolve, reject) => {
+          Promise.all([p1]).then(() => {
+            console.log('Product Updated')
+            this.dialogRef.close();
+            resolve(this.utilityService.resolveAsyncPromise('Product Updated!'))
+          }).catch((err) => {
+            reject(this.utilityService.rejectAsyncPromise('Unable to update the product!'))
+            console.log(err);
+          })
+        }))
     }
 
     // new Promise((resolve, reject)=>{
