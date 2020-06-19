@@ -42,7 +42,7 @@ export class ProductsController{
 
 
             // Delete image
-            fs.unlinkSync(path.join(__dirname, '../../uploads/images' + product.name + '.jpg'))
+            fs.unlinkSync(path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + '.jpg'))
 
             // Send status 200 response
             return res.status(200).json({
@@ -179,8 +179,8 @@ export class ProductsController{
             });
 
             // Rename image
-            fs.rename(path.join(__dirname, '../../uploads/images' + product.name + '.jpg'), 
-            path.join(__dirname, '../../uploads/images' + product.name + '.jpg'), () => { 
+            fs.rename(path.join(__dirname, '../../uploads/images/' + productName.name.toLowerCase().replace(/\s/g, "") + '.jpg'), 
+            path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + '.jpg'), () => { 
                 console.log("\nFile Renamed!\n"); 
             });
 

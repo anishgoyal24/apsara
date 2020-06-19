@@ -77,7 +77,7 @@ app.all('/', (req: Request, res: Response, next: NextFunction) => {
     res.sendFile(path.join(__dirname, './views/index.html'));
 });
 
-app.use('/static', express.static(__dirname + '/uploads'));
+app.use('/static', express.static(__dirname + '/uploads/images'));
 
 // Product routes
 app.use('/api/product', ProductRoutes);
@@ -90,7 +90,9 @@ app.use('/api/user', UserRoutes)
 
 // Upload
 app.post('/api/upload', upload.single('image'), (req: any, res)=>{
-    console.log(req.files);
+    res.json({
+        message: 'success'
+    });
 });
 
 // TODO Add routes api
