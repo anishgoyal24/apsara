@@ -16,6 +16,10 @@ export class CategoryComponent implements OnInit {
 
   filters = [];
 
+  expanded: boolean = false;
+
+  arrow: string = "keyboard_arrow_down";
+
   @Output('filters') filterOutput: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
@@ -49,6 +53,14 @@ export class CategoryComponent implements OnInit {
 
   applyFilters(){
     this.filterOutput.emit(this.filters);
+  }
+
+  toggleExpanded(){
+    this.expanded = !this.expanded;
+    if (this.arrow=="keyboard_arrow_down"){
+      this.arrow = "keyboard_arrow_up";
+    }
+    else this.arrow = "keyboard_arrow_down";
   }
 
 }

@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import { EditDialogComponent } from '../../admin/products/manage-products/edit-dialog/edit-dialog.component';
 import { UtilityService } from 'src/shared/services/utility.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -24,7 +25,10 @@ export class ProductComponent implements OnInit {
 
   @Output('delete') deleteEmitter = new EventEmitter();
 
+  imageUrl: string;
+
   ngOnInit(): void {
+    this.imageUrl = environment.IMAGE_URL+ '/' + this.product.name.toLowerCase().replace(/\s/g, "") + '.jpg';
   }
 
   delete(productId){

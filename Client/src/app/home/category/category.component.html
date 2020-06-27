@@ -1,6 +1,17 @@
 <div class="card text-center">
-    <h4>Filter By Category</h4>
-    <div class="card-body">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Filter By Category</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="float-right">
+                <button id="expand" class="btn"><span class="material-icons" (click)="toggleExpanded()">
+                    {{arrow}}
+                </span></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="expanded==true">
         <div class="text-left">
             <div *ngFor="let category of categories">
                 <mat-checkbox [id]="category._id" [name]="category.name" [value]="category.name" (change)="toggleFilter($event)">{{ category.name }}</mat-checkbox>

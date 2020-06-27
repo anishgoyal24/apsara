@@ -1,10 +1,19 @@
 <div class="card">
     <div class="card-body">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
-        <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>
-        <button class="btn btn-danger" *ngIf="editable==true" (click)="delete(product._id)">Delete</button>
-        <button class="btn btn-secondary" *ngIf="editable==true" (click)="openEditDialog()">Edit</button>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{imageUrl}}" alt="" width="100%" class="img-responsice">
+            </div>
+            <div class="col-md-8">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
+                <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-danger" *ngIf="editable==true" (click)="delete(product._id)">Delete</button>
+            <button class="btn btn-secondary" *ngIf="editable==true" (click)="openEditDialog()">Edit</button>
+        </div>
     </div>
 </div>
