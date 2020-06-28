@@ -58,6 +58,8 @@ var upload = multer({
     storage: storage,
 })
 
+app.use(express.static(path.join(__dirname, '../../Client/dist/Client/'), {redirect: false}));
+
 // Handling GZIPPED ROUTES
 const encodeResToGzip = (contentType: any) => {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -72,9 +74,11 @@ const encodeResToGzip = (contentType: any) => {
 app.get("*.js", encodeResToGzip('text/javascript'));
 app.get("*.css", encodeResToGzip('text/css'));
 
+console.log(path.join(__dirname, '../../Client/dist/Client/'))
+
 // Routes which should handle request
 app.all('/', (req: Request, res: Response, next: NextFunction) => {
-    res.sendFile(path.join(__dirname, './views/index.html'));
+    res.sendFile(path.join(__dirname, '../../Client/dist/Client/index.html'));
 });
 
 app.use('/static', express.static(__dirname + '/uploads/images'));
