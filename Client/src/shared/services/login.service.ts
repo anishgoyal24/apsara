@@ -26,6 +26,6 @@ export class LoginService {
    * @param userData 
    */
   changePassword(userData: any){
-    return this.http.post(environment.LOGIN_URL + '/change-password', {userData}).toPromise();
+    return this.http.post(environment.LOGIN_URL + '/change-password', {userData: userData}).toPromise();
   }
 }
