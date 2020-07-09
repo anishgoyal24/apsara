@@ -75,7 +75,7 @@ import { RemoveCompanyComponent } from './admin/company/remove-company/remove-co
     MatDialogModule,
     SnotifyModule,
     NgbModule,
-    ImageViewerModule.forRoot()
+    ImageViewerModule.forRoot(),
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
