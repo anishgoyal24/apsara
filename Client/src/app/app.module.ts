@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './home/category/category.component';
 import { ProductComponent } from './home/product/product.component';
@@ -69,8 +70,9 @@ import { ProductListingComponent } from './home/product-listing/product-listing.
     NgbModule
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     SnotifyService
   ],
   bootstrap: [AppComponent],

@@ -2,6 +2,10 @@
 
 # Deploy the Apsara gallery
 
+pm2 stop apsara
+
+pm2 delete apsara
+
 cd Client/
 
 npm install &
