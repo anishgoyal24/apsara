@@ -34,6 +34,9 @@ import { ChangePasswordComponent } from './admin/change-password/change-password
 import { HomeNavbarComponent } from './home/home-navbar/home-navbar.component';
 import { ContactUsComponent } from './home/contact-us/contact-us.component';
 import { ProductListingComponent } from './home/product-listing/product-listing.component';
+import { CompanyComponent } from './admin/company/company.component';
+import { AddCompanyComponent } from './admin/company/add-company/add-company.component';
+import { RemoveCompanyComponent } from './admin/company/remove-company/remove-company.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import { ProductListingComponent } from './home/product-listing/product-listing.
     ChangePasswordComponent,
     HomeNavbarComponent,
     ContactUsComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    CompanyComponent,
+    AddCompanyComponent,
+    RemoveCompanyComponent
   ],
   imports: [
     BrowserModule,

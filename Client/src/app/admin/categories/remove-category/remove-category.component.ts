@@ -20,7 +20,6 @@ export class RemoveCategoryComponent implements OnInit {
     new Promise((resolve, reject)=>{
       this.categoryService.getCategories().then((res)=>{
         this.categories = res['categories'];
-        console.log(this.categories);
         resolve();
       }).catch((err)=>{
         console.log(err);

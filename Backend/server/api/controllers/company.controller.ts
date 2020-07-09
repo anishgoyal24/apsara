@@ -61,7 +61,7 @@ export class CompanyController{
              // Send status 200 response
              res.status(200).json({
                 message: `Found ${companies.length} Companies`,
-                categories: companies
+                companies: companies
             });
         } catch (error) {
             // Send Error Response

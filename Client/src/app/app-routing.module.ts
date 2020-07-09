@@ -22,6 +22,9 @@ import { RemoveCategoryComponent } from './admin/categories/remove-category/remo
 import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 import { ContactUsComponent } from './home/contact-us/contact-us.component';
 import { ProductListingComponent } from './home/product-listing/product-listing.component';
+import { CompanyComponent } from './admin/company/company.component';
+import { AddCompanyComponent } from './admin/company/add-company/add-company.component';
+import { RemoveCompanyComponent } from './admin/company/remove-company/remove-company.component';
 
 
 const routes: Routes = [
@@ -43,6 +46,11 @@ const routes: Routes = [
     { path: 'categories', component: CategoriesComponent, children: [
       { path: 'add', component: AddCategoryComponent },
       { path: 'remove', component: RemoveCategoryComponent }
+    ] },
+
+    { path: 'company', component: CompanyComponent, children: [
+      { path: 'add', component: AddCompanyComponent },
+      { path: 'remove', component: RemoveCompanyComponent }
     ] },
 
     { path: 'change-password', component: ChangePasswordComponent }

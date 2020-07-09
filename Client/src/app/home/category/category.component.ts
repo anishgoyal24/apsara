@@ -14,8 +14,6 @@ export class CategoryComponent implements OnInit {
     private companyService: CompanyService
   ) { }
 
-  @Input('company') company : boolean = false;
-
   categories = [];
 
   companies = [];
@@ -35,8 +33,8 @@ export class CategoryComponent implements OnInit {
   @Output('filters') filterOutput: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
-    if (this.company == false)this.fetchCategories();
-    else this.fetchCompanies();
+    this.fetchCategories();
+    this.fetchCompanies();
   }
 
   fetchCategories(){
@@ -54,6 +52,7 @@ export class CategoryComponent implements OnInit {
   fetchCompanies(){
     new Promise((resolve, reject)=>{
       this.companyService.getCompanies().then((res)=>{
+        console.log(res);
         this.companies = res['companies'];
         resolve();
       }).catch((err)=>{
