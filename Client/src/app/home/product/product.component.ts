@@ -44,8 +44,8 @@ export class ProductComponent implements OnInit {
       fullscreen: 'fa fa-arrows-alt',
     },
     btnShow: {
-      zoomIn: true,
-      zoomOut: true,
+      zoomIn: false,
+      zoomOut: false,
       rotateClockwise: false,
       rotateCounterClockwise: false,
       next: true,

@@ -28,7 +28,7 @@ import { RemoveCompanyComponent } from './admin/company/remove-company/remove-co
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/products', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, children: [
     { path: 'products', component: ProductListingComponent }, 
     { path: 'contactus', component: ContactUsComponent }
