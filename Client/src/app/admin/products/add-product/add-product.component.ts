@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/shared/services/product.service';
 import { CategoryService } from 'src/shared/services/category.service';
 import { UtilityService } from 'src/shared/services/utility.service';
+import { CompanyService } from 'src/shared/services/company.service';
 
 @Component({
   selector: 'app-add-product',
@@ -13,7 +14,8 @@ export class AddProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private companyService: CompanyService
   ) { }
 
   productDetails ={
@@ -22,14 +24,24 @@ export class AddProductComponent implements OnInit {
     url: '',
     description: '',
     type: 'Wholesale',
-    featured: false
+    featured: false,
+    company: '',
+    images: 0
   }
 
   type: string;
 
   imageUploaded: Boolean;
 
+  selectedCompany: string;
+
   categories = [];
+
+  companies = [];
+
+  images = [1];
+
+  imageCount = 0;
 
   ngOnInit(): void {
     this.imageUploaded = false;
@@ -42,14 +54,26 @@ export class AddProductComponent implements OnInit {
         reject();
       })
     })
+
+    new Promise((resolve, reject)=>{
+      this.companyService.getCompanies().then((res)=>{
+        this.companies = res['companies'];
+        resolve();
+      }).catch((err)=>{
+        console.log(err);
+        reject();
+      })
+    })
   }
 
   onAttach($event){
     var image = $event.target.files[0];
-    var filename = this.productDetails.name.toLowerCase().replace(/\s/g, "");
+    var filename = this.productDetails.name.toLowerCase().replace(/\s/g, "")+this.images[this.images.length-1];
     this.utilityService.asyncNotification('Uploading image...', new Promise((resolve, reject)=>{
       this.productService.uploadPhoto(image, filename).then((res)=>{
         this.imageUploaded = true;
+        this.imageCount++;
+        this.productDetails.images = this.imageCount;
         resolve(this.utilityService.resolveAsyncPromise('Image Successfully Uploaded!'));
       }).catch((err)=>{
         console.log(err);
@@ -85,6 +109,10 @@ export class AddProductComponent implements OnInit {
   toggleFeatured($event: any){
     if ($event.checked==true)this.productDetails.featured=true;
     else this.productDetails.featured=false;
+  }
+
+  increaseImages(){
+    this.images.push(this.images[this.images.length-1] + 1);
   }
 
 }

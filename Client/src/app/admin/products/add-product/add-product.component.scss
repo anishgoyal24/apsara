@@ -12,4 +12,9 @@
 	button{
 		align-items: center;
 	}
+
+	.dropdown-menu{ 
+        max-height:250px; 
+        overflow:auto; 
+    }
 }

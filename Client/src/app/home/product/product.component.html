@@ -2,11 +2,11 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{imageUrl}}" alt="" width="100%" class="img-responsice">
+                <ngx-image-viewer [src]="images"></ngx-image-viewer>
             </div>
             <div class="col-md-8">
                 <h3>{{ product.name }}</h3>
-                <p><strong>Company: </strong>{{ product.company }}</p>
+                <p><strong>Brand: </strong>{{ product.company.name }}</p>
                 <p>{{ product.description }}</p>
                 <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
                 <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>

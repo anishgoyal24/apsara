@@ -52,7 +52,6 @@ export class CategoryComponent implements OnInit {
   fetchCompanies(){
     new Promise((resolve, reject)=>{
       this.companyService.getCompanies().then((res)=>{
-        console.log(res);
         this.companies = res['companies'];
         resolve();
       }).catch((err)=>{

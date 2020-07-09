@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ImageViewerModule } from "ngx-image-viewer";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,7 +74,8 @@ import { RemoveCompanyComponent } from './admin/company/remove-company/remove-co
     MatCheckboxModule,
     MatDialogModule,
     SnotifyModule,
-    NgbModule
+    NgbModule,
+    ImageViewerModule.forRoot()
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },

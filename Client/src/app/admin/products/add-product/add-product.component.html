@@ -26,6 +26,20 @@
             <p *ngIf="this.type" style="margin-top: 2%;">Selected Type: <strong>{{this.type}}</strong></p>
           </div>
 
+          <div class="form-group">
+            <div class="dropdown">
+              <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Brand
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" *ngFor="let company of companies" (click)="productDetails.company = company._id; this.selectedCompany = company.name">{{company.name}}</a>
+              </div>
+            </div>
+    
+            <p *ngIf="this.selectedCompany" style="margin-top: 2%;">Selected Brand: <strong>{{this.selectedCompany}}</strong></p>
+          </div>
+
         <div class="form-group" *ngIf="productDetails.type=='Wholesale'">
             <label for="fullName">Product URL</label>
             <input type="text" [(ngModel)]="productDetails.url" class="form-control" id="url" placeholder="Product URL" name="url">
@@ -56,10 +70,13 @@
           <!-- TODO categories -->
 
           <div class="form-group" *ngIf="productDetails.name.length>0">
-            <label for="fullName">Select Product Image</label>
-            <button type="button" class="btn btn-link">
+            <div *ngFor="let i of images">
+              <label for="fullName">Select Product Image</label>
+              <button type="button" class="btn btn-link">
                 <input #fileInput type="file" class="btn btn-warning btn-md file-input" (input)="onAttach($event)" placeholder="File" accept="image/*" />
-            </button>
+              </button>
+            </div>
+            <button class="btn btn-primary" (click)="increaseImages();">+ More Images</button>
         </div>
 
         <div class="form-group">

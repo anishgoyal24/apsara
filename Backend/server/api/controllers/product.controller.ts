@@ -42,7 +42,9 @@ export class ProductsController{
 
 
             // Delete image
-            fs.unlinkSync(path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + '.jpg'))
+            for (var i = 1; i <= product.images; i++){
+                fs.unlinkSync(path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + i + '.jpg'))
+            }
 
             // Send status 200 response
             return res.status(200).json({
@@ -82,7 +84,7 @@ export class ProductsController{
             // Fetch first 10 products
             const products: any = await Product.find({
                 _id: { lt: lastProductId }
-            }).sort('-_id').limit(10).populate('category', 'name').lean() || [];
+            }).sort('-_id').limit(10).populate('category', 'name').populate('company', 'name').lean() || [];
 
             // Send status 200 response
             return res.status(200).json({
@@ -107,7 +109,7 @@ export class ProductsController{
                     { category: { $in: filters.category } },
                     { company: { $in: filters.company } }
                 ] 
-            }).populate('category company', 'name').lean();
+            }).populate('category', 'name').populate('company', 'name').lean();
 
             // Send status 200 response
             return res.status(200).json({
@@ -128,7 +130,7 @@ export class ProductsController{
             // Retrieve products with specified categories
             const products: any = await Product.find({
                 featured: true
-            }).populate('category', 'name').lean();
+            }).populate('category', 'name').populate('company', 'name').lean();
 
             // Send status 200 response
             return res.status(200).json({
@@ -182,10 +184,12 @@ export class ProductsController{
             });
 
             // Rename image
-            fs.rename(path.join(__dirname, '../../uploads/images/' + productName.name.toLowerCase().replace(/\s/g, "") + '.jpg'), 
-            path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + '.jpg'), () => { 
+            for (var i = 1; i <= product.images; i++){
+                fs.rename(path.join(__dirname, '../../uploads/images/' + productName.name.toLowerCase().replace(/\s/g, "") + i + '.jpg'), 
+                path.join(__dirname, '../../uploads/images/' + product.name.toLowerCase().replace(/\s/g, "") + i + '.jpg'), () => { 
                 console.log("\nFile Renamed!\n"); 
             });
+            }
 
             // Send status 200 response
             return res.status(200).json({

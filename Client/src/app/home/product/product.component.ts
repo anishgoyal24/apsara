@@ -25,10 +25,13 @@ export class ProductComponent implements OnInit {
 
   @Output('delete') deleteEmitter = new EventEmitter();
 
-  imageUrl: string;
+  images: Array<String>;
 
   ngOnInit(): void {
-    this.imageUrl = environment.IMAGE_URL+ '/' + this.product.name.toLowerCase().replace(/\s/g, "") + '.jpg';
+    for (var i = 1; i <= this.product.images; i++){
+      this.images.push(environment.IMAGE_URL+ '/' + this.product.name.toLowerCase().replace(/\s/g, "") + i + '.jpg');
+    }
+    console.log(this.images);
   }
 
   delete(productId){
