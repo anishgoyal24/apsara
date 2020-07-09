@@ -4,7 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import { developmentConfig, productionConfig } from './configs';
-import { ProductRoutes, CategoryRoutes, UserRoutes } from './api/routes';
+import { ProductRoutes, CategoryRoutes, UserRoutes, CompanyRoutes } from './api/routes';
 import { UserController } from './api/controllers/user.controller';
 const multer = require('multer');
 
@@ -91,6 +91,9 @@ app.use('/api/category', CategoryRoutes);
 
 // User Routes
 app.use('/api/user', UserRoutes)
+
+// Company Routes
+app.use('/api/company', CompanyRoutes)
 
 // Upload
 app.post('/api/upload', upload.single('image'), (req: any, res)=>{

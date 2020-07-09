@@ -7,20 +7,5 @@
     </div>
     </div>
   </header>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 search">
-            <app-search (products)="setProducts($event)"></app-search>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <app-category (filters)="filterProducts($event)"></app-category>
-        </div>
-        <div class="col-md-9">
-            <div *ngFor="let product of products">
-                <app-product [product]="product"></app-product>
-            </div>
-        </div>
-    </div>
-</div>
+  <app-home-navbar></app-home-navbar>
+  <router-outlet></router-outlet>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/shared/services/product.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-product-listing',
+  templateUrl: './product-listing.component.html',
+  styleUrls: ['./product-listing.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ProductListingComponent implements OnInit {
 
   constructor(
     private productService: ProductService
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   products = [];
 
   ngOnInit(): void {
-    // this.getFeaturedProducts();
+    this.getFeaturedProducts();
   }
 
   filterProducts(filters: any){
@@ -46,6 +46,5 @@ export class HomeComponent implements OnInit {
   setProducts(products){
     this.products = products;
   }
-  
 
 }

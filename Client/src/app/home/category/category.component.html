@@ -1,7 +1,7 @@
 <div class="card text-center">
     <div class="row">
         <div class="col-md-8">
-            <h4>Filter By Category</h4>
+            <h4 *ngIf="company == false">Filter By Category</h4>
         </div>
         <div class="col-md-4">
             <div class="float-right">
@@ -16,10 +16,34 @@
             <div *ngFor="let category of categories">
                 <mat-checkbox [id]="category._id" [name]="category.name" [value]="category.name" (change)="toggleFilter($event)">{{ category.name }}</mat-checkbox>
             </div>
+        </div> 
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Filter By Company</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="float-right">
+                <button id="expand" class="btn"><span class="material-icons" (click)="toggleExpandedCompany()">
+                    {{arrowCompany}}
+                </span></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="expandedCompany==true">
+        <div class="text-left">
+            <div *ngFor="let company of companies">
+                <mat-checkbox [id]="company._id" [name]="company.name" [value]="company.name" (change)="toggleFilterCompany($event)">{{ company.name }}</mat-checkbox>
+            </div>
         </div>
 
-        <div class="center">
-            <button class="btn btn-primary" (click)="applyFilters()">Apply</button>
-        </div>
+        
+    </div>
+
+    <div class="center">
+        <button class="btn btn-primary" (click)="applyFilters()">Apply</button>
     </div>
 </div>

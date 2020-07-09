@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit {
 
   onAttach($event){
     var image = $event.target.files[0];
-    var filename = this.productDetails.name.toLowerCase();
+    var filename = this.productDetails.name.toLowerCase().replace(/\s/g, "");
     this.utilityService.asyncNotification('Uploading image...', new Promise((resolve, reject)=>{
       this.productService.uploadPhoto(image, filename).then((res)=>{
         this.imageUploaded = true;

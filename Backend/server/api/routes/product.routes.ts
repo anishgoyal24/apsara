@@ -18,7 +18,7 @@ router.get('/', productController.getProducts);
 router.get('/next', productController.getNextProducts);
 
 // Get products by category
-router.post('/by-category', productController.getByCategories);
+router.post('/filtered', productController.getFiltered);
 
 // Get featured products
 router.get('/featured', productController.getFeatured);

@@ -4,5 +4,6 @@ export const environment = {
   PRODUCT_URL: 'http://localhost:5000/api/product',
   LOGIN_URL: 'http://localhost:5000/api/user',
   UPLOAD_URL: 'http://localhost:5000/api/upload',
-  IMAGE_URL: 'http://localhost:5000/static'
+  IMAGE_URL: 'http://localhost:5000/static',
+  COMPANY_URL: 'http://localhost:5000/api/company'
 };

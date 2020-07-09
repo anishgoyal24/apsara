@@ -97,14 +97,17 @@ export class ProductsController{
 
 
     // Function to get products by categories
-    async getByCategories(req: Request, res: Response, next: NextFunction){
+    async getFiltered(req: Request, res: Response, next: NextFunction){
         try {
-            const { categories } = req.body;
+            const { filters } = req.body;
 
             // Retrieve products with specified categories
             const products: any = await Product.find({
-                category: { $in: categories } 
-            }).populate('category', 'name').lean();
+                "$or": [
+                    { category: { $in: filters.category } },
+                    { company: { $in: filters.company } }
+                ] 
+            }).populate('category company', 'name').lean();
 
             // Send status 200 response
             return res.status(200).json({

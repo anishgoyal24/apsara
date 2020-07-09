@@ -6,6 +6,7 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ product.name }}</h3>
+                <p><strong>Company: </strong>{{ product.company }}</p>
                 <p>{{ product.description }}</p>
                 <a class="btn btn-primary" *ngIf="product.url.length>0" style="color: white" [href]="product.url" target="_blank">Buy Now</a>
                 <p style="color: red;" *ngIf="product.url.length==0">Available In Store</p>

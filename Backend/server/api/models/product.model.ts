@@ -14,14 +14,21 @@ const ProductSchema = new Schema({
         required: true
     }], 
 
+    company: {
+        type: Schema.Types.ObjectId,
+        ref: 'Company',
+        required: false
+    }, 
+
     url: {
         type: String,
         required: false,
     },
 
-    photo: {
-        type: String,
-        required: false
+    images: {
+        type: Number,
+        required: true,
+        default: 1
     },
 
     description: {
@@ -37,7 +44,7 @@ const ProductSchema = new Schema({
     featured: {
         type: Boolean,
         default: false
-    }
+    },
 });
 
 const Product = mongoose.model('Product', ProductSchema);

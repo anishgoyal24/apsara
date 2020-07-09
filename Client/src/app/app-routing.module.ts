@@ -20,11 +20,16 @@ import { CategoriesComponent } from './admin/categories/categories.component';
 import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
 import { RemoveCategoryComponent } from './admin/categories/remove-category/remove-category.component';
 import { ChangePasswordComponent } from './admin/change-password/change-password.component';
+import { ContactUsComponent } from './home/contact-us/contact-us.component';
+import { ProductListingComponent } from './home/product-listing/product-listing.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, children: [
+    { path: 'products', component: ProductListingComponent }, 
+    { path: 'contactus', component: ContactUsComponent }
+  ] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
     { path: '', component: OverviewComponent },
 

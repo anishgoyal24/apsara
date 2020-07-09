@@ -22,8 +22,8 @@ export class ProductService {
    * Get product by categories/filters
    * @param categories list of category ids
    */
-  getFilteredProducts(categories: any){
-    return this.http.post(environment.PRODUCT_URL + '/by-category', {categories}).toPromise();
+  getFilteredProducts(filters: any){
+    return this.http.post(environment.PRODUCT_URL + '/filtered', {filters}).toPromise();
   }
 
   /**
